@@ -1,0 +1,40 @@
+<% include header %>	
+<!--ISSUE FORM-->
+<div class="row">
+	<div class="small-6 columns">
+		<form action="#" id="form-submit-issue">
+			<fieldset>
+				<legend>Submit New Issue</legend>
+				<div class="row">
+					<div class="small-6 columns">
+						<label for="created">Your Name:</label>
+						<select name="created" id="created">
+							<option value="5561">River</option>
+							<option value="63939">Tony</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-6 columns">
+						<label for="department">Department:</label>
+						<select name="department" id="department">
+							<option value="Accounting">Accounting</option>
+							<option value="Client Services">Client Services</option>
+							<option value="Call Center">Call Center</option>
+							<option value="Marketing">Marketing</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<label for="description">Description:</label>
+						<textarea name="description" id="issue-description" cols="30" rows="10" placeholder="Describe the issue here..."></textarea>
+					</div>
+				</div>
+				<input id="issue-submit" type="submit" class="button" value="Submit Issue">
+			</fieldset>
+		</form>
+	</div>
+</div>
+<!--END ISSUE FORM-->
+<% include footer %>

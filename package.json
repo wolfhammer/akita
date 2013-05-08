@@ -1,0 +1,28 @@
+{
+  "name": "bpt-issuetracker",
+  "version": "0.0.1",
+  "author": "Brown Paper Tickets Dev Team <devs@brownpapertickets.com>",
+  "description": "A simple bug and feature request tool BPT uses internally",
+  "contributors": [
+    {
+      "name": "Tony Bennett",
+      "email": "tony@brownpapertickets.com"
+    },
+    {
+      "name": "River",
+      "email": "river@brownpapertickets.com"
+    }
+  ],
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.2",
+    "ejs": "0.8.3",
+    "nconf": "0.6.7",
+    "redis": "0.8.3"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
