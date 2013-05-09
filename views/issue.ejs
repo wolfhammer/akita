@@ -1,0 +1,21 @@
+<? include header ?>
+<script src="/js/take-issue.js" type="text/javascript"></script>
+<div class="row">
+	<div class="small-12 columns">
+		<h4>Issue: <?= issue.issueTitle ?></h4>
+		<p>
+			<strong>Created By:</strong> <?= issue.createdBy ?><br />
+			<strong>Date:</strong> <?= issue.createdOn ?><br />
+			<strong>Department:</strong> <?= issue.issueDepartment ?>
+		</p>
+		<p>
+			<a href="#" class="button small round" id="button-take-issue" data-issue-id="<?= issue.issueId ?>">Take Issue</a>
+		<p>
+			<strong>Description:</strong>
+		</p>
+		<p>
+			<?= issue.issueDescription ?>
+		</p>
+	</div>
+</div>
+<? include footer ?>

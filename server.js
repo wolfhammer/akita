@@ -3,6 +3,10 @@ var nconf = require('nconf');
 var express = require('express');
 var app = express();
 
+var ejs = require('ejs');
+ejs.open = '<?';
+ejs.close = '?>';
+
 // Load our configuration and routes
 var conf = require('./config');
 var routes = require('./routes');
@@ -33,8 +37,11 @@ app.configure('production', function(){
 // Routes
 app.get('/', routes.index);
 app.get('/api/latest', routes.findLatest);
+app.get('/issues/open', routes.findLatest);
+app.post('/issues/take/:uid/:issueId', routes.takeIssue);
+app.get('/issues/assigned/:uid', routes.findByAssignee);
 //app.get('/api/issues', routes.findAll);
-//app.get('/api/issues/:id', routes.findById);
+app.get('/issues/:id', routes.findById);
 app.post('/api/issues', routes.addIssue);
 //app.put('/api/issues/:id', routes.updateIssue);
 //app.delete('/api/issues/:id', routes.deleteIssue);

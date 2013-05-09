@@ -1,0 +1,10 @@
+<!-- partials/latestissues.ejs -->
+<? for(var i=0; i<latestIssues.length; i++) { ?>
+	<tr>
+		<td><?= latestIssues[i].issueId ?></td>
+		<td><?= latestIssues[i].createdOn ?></td>
+		<td><?= latestIssues[i].createdBy ?></td>
+		<td><?= latestIssues[i].issueDepartment ?></td>
+		<td><a href="/issues/<?= latestIssues[i].issueId ?>"><?= latestIssues[i].issueTitle ?></a></td>
+	</tr>
+<? } ?> 

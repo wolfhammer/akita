@@ -1,0 +1,30 @@
+<? include header ?>
+
+<div class="row">
+	<div class="small-12 columns">
+		<h2>Open Issues</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Department</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<? for(var i=0; i<items.length; i++) { ?>
+					<tr>
+						<td><?= items[i].issueId ?></td>
+						<td><a href="/issues/<?= items[i].issueId ?>"><?= items[i].issueTitle ?></a></td>
+						<td><?= items[i].createdBy ?></td>
+						<td><?= items[i].issueDepartment ?></td>
+						<td><?= items[i].createdOn ?></td>
+					</tr>
+				<? } ?> 
+			</tbody>
+		</table>
+	</div>
+</div>
+<? include footer ?>

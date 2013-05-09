@@ -8,7 +8,50 @@ client.on("error", function(err) {
 })
 
 exports.index = function(req, res){
-	res.render('index');
+	function getSize(obj) {
+		var size = 0; 
+		var key;
+	    for (key in obj) {
+	        if (obj.hasOwnProperty(key)) size++;
+	    }
+	    return size;
+	};
+	
+	function getLatestIssues() {
+		client.lrange('newissues', 0, 49, function(err, keys){
+			if (err) throw err;
+			console.log(keys);
+
+			if (!keys[0]) {
+				res.render('index', { latestIssues: "" });
+			}
+
+			var latestIssues = [];
+			var j = 0;
+			var len = getSize(keys);
+
+			function buildItemArry (item) {
+				if (err) throw err;
+				
+				latestIssues.push(item);
+				j++;
+				if (j == len) {
+					console.log(latestIssues);
+					res.render('index', { latestIssues: latestIssues });
+				};
+			};
+
+			for (var key in keys) {
+				client.hgetall('issues:' + keys[key], function(err, issue){
+					if (err) throw err;
+					buildItemArry(issue);
+				});
+			};
+		});
+	};
+
+	getLatestIssues();
+	
 };
 
 exports.findLatest = function(req, res){
@@ -36,7 +79,7 @@ exports.findLatest = function(req, res){
 				items.push(item);
 				j++;
 				if (j == len) {
-					res.send(items);
+					res.render('openissues', {items: items});
 				};
 			};
 
@@ -56,13 +99,105 @@ exports.findAll = function(req, res){
 	res.send([{name:"Issue 1"}, {name:"Issue 2"}, {name:"Issue 3"}]);
 };
 
-exports.findById = function(req, res){
-	res.send({id:req.params.id, name: "The Issue Name", description: "The Issue description"});
+exports.findOpenIssues = function(req, res){
+	client.smembers('issues:open', function(err, data){
+		if (err) throw err;
+
+		var items = [];
+		var j = 0;
+		var len = getSize(keys);
+
+		function buildItemArry (item) {
+			if (err) throw err;
+			
+			items.push(item);
+			j++;
+			if (j == len) {
+				res.render('openissues', {items: items});
+			};
+		};
+
+		for (var i in data) {
+			client.hgetall('issues:' + data[i], function(err, issue){
+				if (err) throw err;
+				buildItemArry(issue);
+			});
+		};
+	});
 };
+
+exports.findById = function(req, res){
+	var id =req.params.id;
+	console.log(id);
+
+	client.hgetall('issues:' + id, function(err, issue){
+		if (err) throw err;
+		console.log(issue);
+		res.render('issue', { issue: issue});
+	})
+};
+
+exports.takeIssue = function(req, res){
+	//console.log(req);
+	var issueId =req.param('issueId');
+	var uid = req.param('uid');
+	console.log(uid);
+	console.log(issueId);
+
+	client.sadd('assignee:' + uid, issueId, function(err, data) {
+		if(err) throw err;
+		console.log('this: ' + data);
+		res.send('Success taking issue:' + issueId);
+	});
+};
+
+exports.findByAssignee = function(req, res){
+	var uid = req.params.uid;
+
+	function getSize(obj) {
+		var size = 0; 
+		var key;
+	    for (key in obj) {
+	        if (obj.hasOwnProperty(key)) size++;
+	    }
+	    return size;
+	};
+
+	client.smembers('assignee:' + uid, function(err, keys){
+		if (err) throw err;
+		//console.log(keys);
+		var items = [];
+		var j = 0;
+		var len = getSize(keys);
+
+		function buildItemArry (item) {
+			if (err) throw err;
+			
+			items.push(item);
+			j++;
+			if (j == len) {
+				console.log(items);
+				res.render('assigned', {uid: uid, items: items});
+			};
+		};
+
+		for (var i in keys) {
+			client.hgetall('issues:' + keys[i], function(err, issue){
+
+				if (err) throw err;
+				console.log(issue);
+				buildItemArry(issue);
+			});
+		};
+	});
+};
+
+
 
 exports.addIssue = function(req, res){
 	// Creates new issue in redis data store
 	var user = req.param('created');
+	var title = req.param('title');
 	var dept = req.param('department');
 	var desc = req.param('description');
 	var timestamp = new Date();
@@ -83,9 +218,10 @@ exports.addIssue = function(req, res){
 		var issue = {};
 		// Create new issue object
 		issue = {
-			id: key,
+			issueId: key,
 			createdBy: user,
 			issueDepartment: dept,
+			issueTitle: title,
 			issueDescription: desc,
 			createdOn: timestamp
 		};
@@ -106,7 +242,12 @@ exports.addIssue = function(req, res){
 		
 		// Store the issue object in redis
 		client.hmset(hashKey, issue, function() {
-			res.send("Created new issue: " + hashKey);
+			client.sadd('issues:open', key, function(err, data) {
+				if(err) throw err;
+				console.log(data);
+				res.send('Created new issue: ' + hashKey);
+			});
+			
 		});
 	});
 

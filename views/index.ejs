@@ -1,7 +1,24 @@
-<% include header %>	
-<!--ISSUE FORM-->
+<? include header ?>
+
 <div class="row">
-	<div class="small-6 columns">
+	<div class="small-8 columns">
+		<table>
+			<caption>Newest Issues</caption>
+			<thead>
+				<tr>
+					<th>issueId</th>
+					<th>Date</th>
+					<th>Author</th>
+					<th>Department</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody id="latest-issues">
+				<? include partials/latestissues ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="small-4 columns">
 		<form action="#" id="form-submit-issue">
 			<fieldset>
 				<legend>Submit New Issue</legend>
@@ -11,6 +28,10 @@
 						<select name="created" id="created">
 							<option value="5561">River</option>
 							<option value="63939">Tony</option>
+							<option value="18474">Mike S.</option>
+							<option value="7965">Janessa</option>
+							<option value="26755">Chandler</option>
+							<option value="20985">Joel</option>
 						</select>
 					</div>
 				</div>
@@ -19,22 +40,36 @@
 						<label for="department">Department:</label>
 						<select name="department" id="department">
 							<option value="Accounting">Accounting</option>
-							<option value="Client Services">Client Services</option>
 							<option value="Call Center">Call Center</option>
+							<option value="Client Services">Client Services</option>
+							<option value="Developers">Developers</option>
+							<option value="fulfillment">Fulfillment</option>
 							<option value="Marketing">Marketing</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="small-12 columns">
+						<label for="title">Title:</label>
+						<input type="text" id="title" name="title" placeholder="Enter a descriptive title...">
+				<div class="row">
+					<div class="small-12 columns">
 						<label for="description">Description:</label>
-						<textarea name="description" id="issue-description" cols="30" rows="10" placeholder="Describe the issue here..."></textarea>
+						<textarea name="description" id="issue-description" cols="30" rows="10" placeholder="Describe the issue more fully here..."></textarea>
+						<a href="#" class="help-modal" data-reveal-id="bugReportHelp">Need Help?</a>
 					</div>
 				</div>
 				<input id="issue-submit" type="submit" class="button" value="Submit Issue">
 			</fieldset>
 		</form>
 	</div>
+	<div id="bugReportHelp" class="reveal-modal">
+		<p>
+		Making good bug reports is a great way to help increase the software quality of Brown Paper Tickets. A good bug report is a bug report that provides unambigous step-by-step instructions on how to reproduce the bug, what result that is expected, and what the actual result it. Good bug reports makes it easy for the developers to reproduce and fix the bug.
+		</p>
+		<p>
+		Related to bug reports are feature requests. Feature requests will go through an internal discussion phase before being assigned to a developer. This is to make sure that the feature requests are aligned with the overall goals the developers and other staff have for Brown Paper Tickets software.
+		</p>
+	</div>
 </div>
-<!--END ISSUE FORM-->
-<% include footer %>
+<? include footer ?>
