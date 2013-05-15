@@ -4,14 +4,14 @@
 // Output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
 
 var pg = require('pg');
-var conf = require('config');
+var conf = require('./config');
 
 var pgUser = conf.postgres.user;
 var pgPass = conf.postgres.pass;
 var pgHost = conf.postgres.host;
 var pgDb = conf.postgres.db;
 
-var conString = 'postgres://' + pgUser  + ':' + pgPass + '@' + pgHost '/' db;
+var conString = 'postgres://' + pgUser  + ':' + pgPass + '@' + pgHost + '/' + pgDb;
 var client = new pg.Client(conString);
 client.connect(function(err) {
 	if (err) throw err;
