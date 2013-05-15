@@ -38,7 +38,7 @@ if (!module.parent) app.use(express.logger('dev'));
 // session support
 app.use(express.cookieParser());
 app.use(express.session({
-	secret: 'secret';
+	secret: 'secret'
 }));
 
 app.use(express.query());
