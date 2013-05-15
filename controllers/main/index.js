@@ -1,6 +1,6 @@
 var redis = require('redis');
 var nconf = require('nconf');
-console.log('loaded');
+
 var client = redis.createClient();
 
 client.on("error", function(err) {
@@ -24,7 +24,7 @@ exports.index = function(req, res, next){
 			console.log(keys);
 
 			if (!keys[0]) {
-				res.render('index', { latestIssues: "" });
+				res.render('main/index', { latestIssues: "" });
 			}
 
 			var latestIssues = [];
