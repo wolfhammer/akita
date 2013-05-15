@@ -19,3 +19,4 @@ src/sass/.sass*
 
 npm-debug.log
 node_modules
+config/config.development.js
