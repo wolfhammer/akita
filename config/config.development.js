@@ -12,7 +12,7 @@ config.redis.port = '6379';
 
 config.postgres = {};
 config.postgres.user = 'postgres';
-config.postgres.pass = 'bptdev';
+config.postgres.pass = '';
 config.postgres.host = 'localhost';
 config.postgres.port = '';
 config.postgres.db = '';
