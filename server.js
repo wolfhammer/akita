@@ -13,13 +13,13 @@ var conf = require('./config');
 var ejs = require('ejs');
 ejs.open = '<?';
 ejs.close = '?>';
-app.set('view engine', 'ejs');
 
 // static files
 app.use(express.static(__dirname + '/public'));
 
 // set views for error and 404 pages
 app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 // define a custom res.message() method
 // which stores messages in the session
@@ -37,9 +37,7 @@ if (!module.parent) app.use(express.logger('dev'));
 
 // session support
 app.use(express.cookieParser());
-app.use(express.session({
-	secret: "secret"
-}));
+app.use(express.session();
 
 app.use(express.query());
 
@@ -101,22 +99,6 @@ app.use(function(req, res, next){
 
 // serve static files
 app.use(express.static(__dirname + '/public'));
-
-// Routes
-// app.get('/', routes.index);
-// app.get('/api/latest', routes.findLatest);
-// app.get('/issues/open', routes.findLatest);
-// app.post('/issues/take/:uid/:issueId', routes.takeIssue);
-// app.get('/issues/assigned/:uid', routes.findByAssignee);
-// //app.get('/api/issues', routes.findAll);
-// app.get('/issues/:id', routes.findById);
-// app.post('/api/issues', routes.addIssue);
-//app.put('/api/issues/:id', routes.updateIssue);
-//app.delete('/api/issues/:id', routes.deleteIssue);
-
-//app.get('*', function(req, res){
-//	res.send(404);
-//});
 
 if (!module.parent) {
 	var port = conf.http.port;
