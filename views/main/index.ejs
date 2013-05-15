@@ -1,9 +1,4 @@
-<? include header ?>
-<script type="text/javascript">
-  		$('a.help-modal').click(function() {
-  			$('#bugReportHelp').foundation('reveal', 'open');
-  		});
-  	</script>
+<? include ../partials/header ?>
 <div class="row">
 	<div class="small-8 columns">
 		<table>
@@ -18,7 +13,7 @@
 				</tr>
 			</thead>
 			<tbody id="latest-issues">
-				<? include partials/latestissues ?>
+				<? include ../partials/latestissues ?>
 			</tbody>
 		</table>
 	</div>
@@ -74,6 +69,18 @@
 		<p>
 		Related to bug reports are feature requests. Feature requests will go through an internal discussion phase before being assigned to a developer. This is to make sure that the feature requests are aligned with the overall goals the developers and other staff have for Brown Paper Tickets software.
 		</p>
+		<p><a class="close-reveal-modal">&#215;</a></p>
 	</div>
 </div>
-<? include footer ?>
+<script src="/js/vendor/foundation.reveal.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$('a.help-modal').click(function(e) {
+		e.preventDefault;
+	  	$('#bugReportHelp').foundation('reveal', 'open');
+	});
+	$('a.close-reveal-modal').click(function(e) {
+		e.preventDefault;
+	  	$('#bugReportHelp').foundation('reveal', 'close');
+	});
+</script>
+<? include ../partials/footer ?>
