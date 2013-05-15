@@ -1,4 +1,4 @@
-Brown Paper Tickets Issue Tracker
+Akita
 =================================
 
 Our goal is to create a browser-based bug report/feature request tracker that BPT devs
@@ -9,7 +9,12 @@ as well as allowing them to view who is assigned to a specific bug/feature reque
 
 Users should also be able to post comments on existing issues.
 
-The BPT Issue Tracker will use:
+Akita uses:
 
-Node.js - http://nodejs.org/
-Redis - http://redis.io/
+Node.js - Server Engine  
+Express - Web framework for Node.js  
+Redis  - Session storage and metrics  
+Postgres - Data storage  
+Foundation 4 - CSS Framework  
+Sass / Compass - CSS Precompiler / Library  
+Grunt - Build tool
