@@ -1,4 +1,3 @@
-var nconf = require('nconf');
 var express = require('express');
 var app = module.exports = express();
 //var RedisStore = require('connect-redis')(express);
@@ -120,7 +119,7 @@ app.use(express.static(__dirname + '/public'));
 //});
 
 if (!module.parent) {
-	var port = nconf.get('http:port');
+	var port = conf.http.port;
 	app.listen(port);
 	console.log('\n listening on port' + port + '\n');
 }
