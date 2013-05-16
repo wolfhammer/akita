@@ -1,0 +1,34 @@
+<? include ../partials/header ?>
+<div class="row">
+	<div class="small-12 columns">
+		<h3><?= issue.title ?></h3>
+		<p>
+			<strong class="subheader">Created by</strong> <strong><?= author_name ?></strong> <strong class="subheader"><?= issue.pretty_date ?></strong>
+		</p>
+		<p>
+			<strong class="subheader">Department:</strong> <strong><?= issue.dpt_name ?></strong><br>
+			<strong class="subheader">Status:</strong> <strong><? if (issue.open === true) { ?> Open <? } else { ?> Closed <? } ?></strong><br>
+			<strong class="subheader">Owned By:</strong> <strong><? if (issue.owner === null) { ?> No one has adopted this task <? } else { issue.owner } ?></strong></p>
+		</p>
+		<p>
+			<? if (issue.owner === null) { ?>
+				<a class="tiny round button" id="take-issue" data-issue-id="<?= issue.issue_id ?>">Adopt this Issue</a>
+			<? }; ?>
+		<p>
+			<?= issue.description ?>
+		</p>
+	</div>
+</div>
+<script type="text/javascript">
+$('#take-issue').click(function() {
+	var button = $(this);
+	var issueId = button.data('issueId');
+	$.post('/issues/take/' + issueId, function(data){
+		button.addClass('success');
+		button.addClass('disabled');
+		button.text('You have adopted this issue!');
+	});
+});
+</script>
+
+<? include ../partials/footer ?>

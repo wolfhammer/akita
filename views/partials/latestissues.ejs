@@ -1,10 +1,29 @@
 <!-- partials/latestissues.ejs -->
-<? for(var i=0; i<latestIssues.length; i++) { ?>
-	<tr>
-		<td><?= latestIssues[i].issueId ?></td>
-		<td><?= latestIssues[i].createdOn ?></td>
-		<td><?= latestIssues[i].createdBy ?></td>
-		<td><?= latestIssues[i].issueDepartment ?></td>
-		<td><a href="/issues/<?= latestIssues[i].issueId ?>"><?= latestIssues[i].issueTitle ?></a></td>
-	</tr>
-<? } ?> 
+<table class="large-8">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Status</th>
+			<th>Owner</th>
+		</tr>
+	<tbody id="latest-issues">
+	<? for(var i=0; i<latestIssues.length; i++) { ?>
+		<tr>
+			<td class="small-5">
+				<h4><a href="/issues/<?= latestIssues[i].issue_id ?>"><?= latestIssues[i].title ?></a></h4>
+				<strong><?= latestIssues[i].pretty_date ?></strong>
+			</td>
+			<td class="small-3">
+				<strong><?= client_name ?></strong>
+			</td>
+			<td class="small-3">
+				<? if (latestIssues[i].open === true) { ?> Open <? } else { ?> Closed <? } ?>
+			</td>
+			<td class="small-1">
+				<? if (latestIssues[i].owner === null) { ?>  <? } else {?> River <?} ?>
+			</td>
+		</tr>
+	<? } ?>
+	</tbody>
+</table>

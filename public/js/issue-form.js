@@ -6,7 +6,7 @@ $(function() {
 		console.log(formData);
 
 		$.ajax({
-			url: '/api/issues',
+			url: '/issues/new',
 			type: 'POST',
 			data: formData,
 			beforeSend: function() {
@@ -18,6 +18,7 @@ $(function() {
 			success: function(data) {
 				//location.reload();
 				console.log('Success: ' + data);
+				window.location.replace("/");
 			}
 		});
 	});

@@ -1,8 +1,21 @@
 var express = require('express');
+var validator = require('express-validator');
 var app = module.exports = express();
-//var RedisStore = require('connect-redis')(express);
-//var redis = require('redis');
 
+
+var RedisStore = require('connect-redis')(express);
+var redis = require('redis');
+
+var db = require('./dev/db');
+db.connect(function(err){
+	if (err) {
+		console.log('Error connecting to postgres:');
+		console.log(err);
+	};
+	console.log('Successfully connected to postgres!')
+});
+
+app.use(validator);
 
 // SETTINGS
 

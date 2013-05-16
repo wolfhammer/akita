@@ -1,0 +1,30 @@
+<? include ../partials/header ?>
+<table class="large-8">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Status</th>
+			<th>Owner</th>
+		</tr>
+	<tbody id="latest-issues">
+	<? for(var i=0; i<issues.length; i++) { ?>
+		<tr>
+			<td class="small-5">
+				<h4><a href="/issues/<?= issues[i].issue_id ?>"><?= issues[i].title ?></a></h4>
+				<strong><?= issues[i].pretty_date ?></strong>
+			</td>
+			<td class="small-3">
+				<strong>River</strong>
+			</td>
+			<td class="small-3">
+				<? if (issues[i].open === true) { ?> Open <? } else { ?> Closed <? } ?>
+			</td>
+			<td class="small-1">
+				<? if (issues[i].owner === null) { ?>  <? } else {?> River <?} ?>
+			</td>
+		</tr>
+	<? } ?>
+	</tbody>
+</table>
+<? include ../partials/footer ?>
