@@ -25,7 +25,7 @@ git clone https://github.com/USERNAME/akita.git
 
 The MIT License (MIT)
 
-Copyright (c) <2013> <River Neff, Tony Bennett>
+Copyright (c) &lt;2013&amp; &lt;River Neff, Tony Bennett&amp;
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
